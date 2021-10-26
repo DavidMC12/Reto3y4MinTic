@@ -20,7 +20,7 @@ public class Cloud implements Serializable {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name="idCategory")
+    @JoinColumn(name="id")
     @JsonIgnoreProperties({"clouds"})
     private Category category;
 

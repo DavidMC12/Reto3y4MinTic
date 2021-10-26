@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/Message")
+@CrossOrigin(origins = "*")
 public class MessageController {
 
     @Autowired
