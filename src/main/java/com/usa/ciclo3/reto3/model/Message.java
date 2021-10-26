@@ -5,10 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="message")
-public class Message {
+public class Message implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,12 +42,12 @@ public class Message {
         this.messageText = messageText;
     }
 
-    public Cloud getClouds() {
+    public Cloud getCloud() {
         return cloud;
     }
 
-    public void setClouds(Cloud clouds) {
-        this.cloud = clouds;
+    public void setCloud(Cloud cloud) {
+        this.cloud = cloud;
     }
 
     public Client getClient() {
