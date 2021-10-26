@@ -2,7 +2,6 @@ package com.usa.ciclo3.reto3.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.context.annotation.EnableMBeanExport;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,7 +19,7 @@ public class Category implements Serializable {
 
     @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "category")
     @JsonIgnoreProperties({"category"})
-    private List<Cloud> cloud;
+    private List<Cloud> clouds;
 
     public Integer getId() {
         return id;
@@ -46,11 +45,11 @@ public class Category implements Serializable {
         this.description = description;
     }
 
-    public List<Cloud> getCloud() {
-        return cloud;
+    public List<Cloud> getClouds() {
+        return clouds;
     }
 
-    public void setCloud(List<Cloud> cloud) {
-        this.cloud = cloud;
+    public void setClouds(List<Cloud> clouds) {
+        this.clouds = clouds;
     }
 }
