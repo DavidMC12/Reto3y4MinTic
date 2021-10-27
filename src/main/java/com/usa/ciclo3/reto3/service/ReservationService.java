@@ -41,10 +41,33 @@ public class ReservationService {
         if (reservation.getIdReservation() != null){
             Optional<Reservation> tpmReservation = reservationRepository.getReservation(reservation.getIdReservation());
             if (!tpmReservation.isEmpty()){
-                return reservationRepository.save(reservation);
+                if (reservation.getStartDate()!=null){
+                    tpmReservation.get().setStartDate(reservation.getStartDate());
+                }
+                if (reservation.getDevolutionDate()!=null){
+                    tpmReservation.get().setDevolutionDate(reservation.getDevolutionDate());
+                }
+                if (reservation.getStatus()!=null){
+                    tpmReservation.get().setStatus(reservation.getStatus());
+                }
+                if (reservation.getCloud()!=null){
+                    tpmReservation.get().setCloud(reservation.getCloud());
+                }
+                if (reservation.getClient()!=null){
+                    tpmReservation.get().setClient(reservation.getClient());
+                }
+                if (reservation.getScore()!=null){
+                    tpmReservation.get().setScore(reservation.getScore());
+                }
+                return reservationRepository.save(tpmReservation.get());
+            }
+            else{
+                return reservation;
             }
         }
-        return reservation;
+        else{
+            return reservation;
+        }
     }
 
     public boolean deleteReservation(int id){

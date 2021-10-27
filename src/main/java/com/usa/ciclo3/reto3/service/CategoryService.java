@@ -41,10 +41,24 @@ public class CategoryService {
         if (category.getId() != null) {
             Optional<Category> tmpCategory = categoryRepository.getCategory(category.getId());
             if (!tmpCategory.isEmpty()) {
-                return categoryRepository.save(category);
+                if (category.getName()!=null){
+                    tmpCategory.get().setName(category.getName());
+                }
+                if (category.getDescription()!=null){
+                    tmpCategory.get().setDescription(category.getDescription());
+                }
+                if (category.getClouds()!=null){
+                    tmpCategory.get().setClouds(category.getClouds());
+                }
+                return categoryRepository.save(tmpCategory.get());
+            }
+            else{
+                return category;
             }
         }
-        return category;
+        else {
+            return category;
+        }
     }
 
     public boolean deleteCategory(int id){

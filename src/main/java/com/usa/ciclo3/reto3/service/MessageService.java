@@ -42,10 +42,24 @@ public class MessageService {
         if (message.getIdMessage() != null){
             Optional<Message> tpmMessage = messageRepository.getMessage(message.getIdMessage());
             if (!tpmMessage.isEmpty()) {
-                return messageRepository.save(message);
+                if (message.getMessageText()!=null) {
+                    tpmMessage.get().setMessageText(message.getMessageText());
+                }
+                if (message.getCloud()!=null){
+                    tpmMessage.get().setCloud(message.getCloud());
+                }
+                if (message.getClient()!=null){
+                    tpmMessage.get().setClient(message.getClient());
+                }
+                return messageRepository.save(tpmMessage.get());
+            }
+            else{
+                return message;
             }
         }
-        return  message;
+        else{
+            return  message;
+        }
     }
 
     public  boolean deleteMessage(int id){

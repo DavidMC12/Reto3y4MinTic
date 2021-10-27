@@ -42,10 +42,36 @@ public class CloudService {
         if (cloud.getId() != null){
             Optional<Cloud> tpmCloud = cloudRepository.getCloud(cloud.getId());
             if (!tpmCloud.isEmpty()){
-                return cloudRepository.save(cloud);
+                if (cloud.getName()!=null){
+                    tpmCloud.get().setName(cloud.getName());
+                }
+                if (cloud.getBrand()!=null){
+                    tpmCloud.get().setBrand(cloud.getBrand());
+                }
+                if (cloud.getYear()!=null){
+                    tpmCloud.get().setYear(cloud.getYear());
+                }
+                if (cloud.getDescription()!=null){
+                    tpmCloud.get().setDescription(cloud.getDescription());
+                }
+                if (cloud.getCategory()!=null){
+                    tpmCloud.get().setCategory(cloud.getCategory());
+                }
+                if (cloud.getMessages()!=null){
+                    tpmCloud.get().setMessages(cloud.getMessages());
+                }
+                if (cloud.getReservations()!=null){
+                    tpmCloud.get().setReservations(cloud.getReservations());
+                }
+                return cloudRepository.save(tpmCloud.get());
+            }
+            else{
+                return cloud;
             }
         }
-        return cloud;
+        else{
+            return cloud;
+        }
     }
 
     public boolean deleteCloud(int id){

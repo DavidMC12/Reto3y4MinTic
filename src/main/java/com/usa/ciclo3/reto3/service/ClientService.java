@@ -41,10 +41,33 @@ public class ClientService {
         if (client.getIdClient() != null){
             Optional<Client> tpmClient = clientRepository.getClient(client.getIdClient());
             if (!tpmClient.isEmpty()){
-                return clientRepository.save(client);
+                if (client.getEmail()!=null){
+                    tpmClient.get().setEmail(client.getEmail());
+                }
+                if (client.getPassword()!=null){
+                    tpmClient.get().setPassword(client.getPassword());
+                }
+                if (client.getName()!=null){
+                    tpmClient.get().setName(client.getName());
+                }
+                if (client.getAge()!=null){
+                    tpmClient.get().setAge(client.getAge());
+                }
+                if (client.getMessages()!=null){
+                    tpmClient.get().setMessages(client.getMessages());
+                }
+                if (client.getReservations()!=null){
+                    tpmClient.get().setReservations(client.getReservations());
+                }
+                return clientRepository.save(tpmClient.get());
+            }
+            else {
+                return client;
             }
         }
-        return client;
+        else {
+            return client;
+        }
     }
 
     public boolean deleteClient(int id){
