@@ -61,5 +61,4 @@ public class ReservationController {
     public List<CountClient> getClient(){
         return reservationService.reportClientService();
     }
-
 }
